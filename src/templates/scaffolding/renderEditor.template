@@ -121,6 +121,7 @@
     }
 
     private renderDateEditor(domainClass, property) {
+/*
         def precision = (property.type == Date || property.type == java.sql.Date || property.type == Calendar) ? "day" : "minute";
         if (!cp) {
             return "<g:datePicker name=\"${property.name}\" precision=\"${precision}\" value=\"\${${domainInstance}?.${property.name}}\" />"
@@ -138,6 +139,21 @@
                 return sb.toString()
             }
         }
+*/
+        def sb = new StringBuilder()
+        sb << '<input type="text" id="'
+        sb << property.name
+        sb << '" name="'
+        sb << property.name
+        sb << '">'
+        sb << """
+<script type="text/javascript">
+    \$(document).ready(function() {
+          \$("#${property.name}").datepicker({dateFormat: 'yy/mm/dd'});
+    })
+</script>
+"""
+        return sb.toString()
     }
 
     private renderSelectTypeEditor(type, domainClass, property) {
